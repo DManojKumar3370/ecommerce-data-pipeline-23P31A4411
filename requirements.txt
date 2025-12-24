@@ -1,0 +1,21 @@
+# Data Processing
+pandas
+numpy
+
+# Database
+psycopg2-binary
+SQLAlchemy
+
+# Data Generation
+Faker
+
+# Configuration
+PyYAML
+python-dotenv
+
+# Testing
+pytest
+pytest-cov
+
+# Utilities
+requests

@@ -1,0 +1,84 @@
+# Database Configuration
+database:
+  host: localhost
+  port: 5432
+  name: ecommerce_db
+  user: admin
+  password: password
+  timeout: 30
+  pool_size: 10
+  max_overflow: 20
+
+# Schema Configuration
+schemas:
+  staging: staging
+  production: production
+  warehouse: warehouse
+
+# Data Generation Parameters
+data_generation:
+  num_customers: 1000
+  num_products: 500
+  num_transactions: 10000
+  min_transaction_items: 1
+  max_transaction_items: 5
+  date_start: 2024-01-01
+  date_end: 2024-12-31
+  random_seed: 42
+
+# Data Paths
+data_paths:
+  raw: data/raw
+  staging: data/staging
+  processed: data/processed
+  reports: data/processed
+
+# Pipeline Configuration
+pipeline:
+  batch_size: 1000
+  enable_transactions: true
+  max_retries: 3
+  retry_backoff_seconds: [1, 2, 4]
+  timeout_seconds: 300
+
+# Logging Configuration
+logging:
+  level: INFO
+  directory: logs
+  file_prefix: pipeline
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Scheduler Configuration
+scheduler:
+  enabled: true
+  time: '09:00'
+  timezone: UTC
+  data_retention_days: 7
+
+# Quality Checks
+quality_checks:
+  enabled: true
+  completeness_threshold: 95
+  uniqueness_check: true
+  referential_integrity_check: true
+  range_check: true
+  consistency_check: true
+  quality_score_threshold: 95
+
+# Monitoring
+monitoring:
+  enabled: true
+  freshness_threshold_hours: 25
+  anomaly_detection: true
+  alert_critical_threshold: 80
+  alert_warning_threshold: 90
+
+# BI Tool Configuration
+bi_tool:
+  type: tableau
+  tableau:
+    public_url: ""
+    workbook_name: "ecommerce_analytics"
+  powerbi:
+    workspace: default
+    report_name: "ecommerce_analytics"
