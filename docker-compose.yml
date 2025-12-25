@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # SQLite Database Service (runs in container)
+  database:
+    image: sqlite:latest
+    container_name: ecommerce-db
+    volumes:
+      - ./data:/data
+      - ./logs:/logs
+    environment:
+      - DB_PATH=/data/ecommerce.db
+    networks:
+      - ecommerce-network
+    ports:
+      - "5432:5432"
+
+  # Pipeline Orchestration Service
+  pipeline:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: ecommerce-pipeline
+    depends_on:
+      - database
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./scripts:/app/scripts
+      - ./config:/app/config
+    environment:
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_NAME=ecommerce.db
+      - PYTHONUNBUFFERED=1
+    networks:
+      - ecommerce-network
+    command: python scripts/orchestration/orchestrator.py
+    restart: on-failure
+
+  # Monitoring Service (optional)
+  monitoring:
+    image: python:3.9-slim
+    container_name: ecommerce-monitoring
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    networks:
+      - ecommerce-network
+    command: tail -f /dev/null
+    restart: unless-stopped
+
+networks:
+  ecommerce-network:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local

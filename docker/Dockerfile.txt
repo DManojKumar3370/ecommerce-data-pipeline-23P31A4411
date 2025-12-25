@@ -1,5 +1,5 @@
-# Use official Python runtime as base image
-FROM python:3.11-slim
+# Multi-stage build for optimization
+FROM python:3.9-slim as base
 
 # Set working directory
 WORKDIR /app
@@ -10,22 +10,30 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
-    postgresql-client \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
+# Copy requirements first (for better caching)
 COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Copy application code
+# Copy entire project
 COPY . .
 
-# Create logs directory
-RUN mkdir -p logs
+# Create directories
+RUN mkdir -p data/raw data/staging data/processed logs
+
+# Expose port (optional, for future services)
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "import sqlite3; sqlite3.connect('data/ecommerce.db')"
 
 # Default command
-CMD ["python", "scripts/pipeline_orchestrator.py"]
+CMD ["python", "scripts/orchestration/orchestrator.py"]
