@@ -1,0 +1,63 @@
+# Pipeline Scheduler Configuration
+schedule:
+  # Frequency: daily, weekly, hourly
+  frequency: "daily"
+  
+  # Time to run (24-hour format) - 2 AM IST
+  time: "02:00"
+  
+  # Timezone
+  timezone: "Asia/Kolkata"
+  
+  # Retry settings
+  retry_attempts: 3
+  retry_interval_minutes: 5
+  
+  # Timeout (minutes)
+  timeout_minutes: 60
+
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  
+  # Keep logs for N days
+  retention_days: 30
+  
+  # Max log file size (MB)
+  max_size_mb: 50
+
+notifications:
+  # Enable alerts on failure
+  enabled: true
+  
+  # Email on failure
+  send_email_on_failure: true
+  email_recipients:
+    - "admin@example.com"
+  
+  # Log to file
+  log_to_file: true
+  log_file: "logs/pipeline_execution.log"
+
+pipeline:
+  # Run full pipeline or specific phases
+  run_all_phases: true
+  
+  # Phases to run
+  phases:
+    - "phase_1_data_generation"
+    - "phase_2_data_ingestion"
+    - "phase_3_data_quality"
+    - "phase_4_transformation"
+    - "phase_5_warehouse_loading"
+
+monitoring:
+  # Enable monitoring
+  enabled: true
+  
+  # Track execution time
+  track_duration: true
+  
+  # Generate execution report
+  generate_report: true
+  report_format: "json"
