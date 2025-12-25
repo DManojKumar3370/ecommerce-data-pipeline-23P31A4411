@@ -6,3 +6,4 @@ Phase 5: Orchestration
 Phase 6: Tests
 Phase 7: Docs
 Ingestion
+Quality
