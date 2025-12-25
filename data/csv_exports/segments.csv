@@ -1,0 +1,5 @@
+spending_segment,customer_count,segment_revenue,avg_customer_value
+$0-$999,320,215000,671.88
+$1000-$4999,450,1350000,3000
+$5000-$9999,150,1125000,7500
+$10000+,80,1210000,15125

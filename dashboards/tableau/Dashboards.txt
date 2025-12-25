@@ -1,0 +1,9 @@
+KPI Dashboard:-  https://public.tableau.com/app/profile/manoj.doddi/viz/KPIDashboard_17666467442930/ExecutiveKPIDashboard?publish=yes
+
+
+
+Sale and Revenue Analysis:-  https://public.tableau.com/app/profile/manoj.doddi/viz/SalesRevenue_Analysis/SalesRevenueAnalysis?publish=yes
+
+Customer%GeographicInsights:-  https://public.tableau.com/app/profile/manoj.doddi/viz/CustomerGeographicInsights/CustomerGeographicInsights?publish=yes
+
+Detailed_Analytics:- https://public.tableau.com/app/profile/manoj.doddi/viz/Detailed_Analytics/DetailedAnalytics?publish=yes

@@ -1,0 +1,19 @@
+product_name,category,total_revenue,units_sold,profit_margin_pct
+Laptop Pro,Electronics,125000,45,28.5
+Wireless Mouse,Electronics,78000,320,35.2
+USB Cable,Electronics,45000,450,42.1
+Winter Jacket,Clothing,95000,180,32.5
+Cotton T-Shirt,Clothing,52000,420,38.2
+Running Shoes,Clothing,68000,85,29.5
+Coffee Maker,Home & Kitchen,58000,140,25.3
+Blender,Home & Kitchen,45000,90,28.7
+Cookware Set,Home & Kitchen,72000,60,31.2
+Sci-Fi Novel,Books,28000,350,45.2
+Mystery Book,Books,32000,420,48.5
+Cookbook,Books,25000,180,42.1
+Dumbbell Set,Sports,45000,75,26.5
+Yoga Mat,Sports,35000,180,38.2
+Tennis Racket,Sports,62000,95,31.2
+Face Cream,Beauty,48000,200,35.5
+Hair Serum,Beauty,52000,280,38.2
+Body Lotion,Beauty,38000,250,36.1
