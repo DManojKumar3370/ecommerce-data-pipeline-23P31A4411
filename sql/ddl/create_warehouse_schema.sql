@@ -102,3 +102,24 @@ CREATE INDEX IF NOT EXISTS idx_fact_sales_customer ON warehouse.fact_sales(custo
 CREATE INDEX IF NOT EXISTS idx_fact_sales_product ON warehouse.fact_sales(product_key);
 CREATE INDEX IF NOT EXISTS idx_dim_customers_current ON warehouse.dim_customers(is_current) WHERE is_current = TRUE;
 CREATE INDEX IF NOT EXISTS idx_dim_products_current ON warehouse.dim_products(is_current) WHERE is_current = TRUE;
+-- SCD Type 2 columns for dimension tables
+ALTER TABLE warehouse.dim_customers
+ADD COLUMN IF NOT EXISTS effective_from TIMESTAMP NOT NULL DEFAULT NOW(),
+ADD COLUMN IF NOT EXISTS effective_to   TIMESTAMP NOT NULL DEFAULT '9999-12-31',
+ADD COLUMN IF NOT EXISTS is_current     BOOLEAN   NOT NULL DEFAULT TRUE;
+
+ALTER TABLE warehouse.dim_products
+ADD COLUMN IF NOT EXISTS effective_from TIMESTAMP NOT NULL DEFAULT NOW(),
+ADD COLUMN IF NOT EXISTS effective_to   TIMESTAMP NOT NULL DEFAULT '9999-12-31',
+ADD COLUMN IF NOT EXISTS is_current     BOOLEAN   NOT NULL DEFAULT TRUE;
+
+-- Foreign key constraints on fact_sales
+ALTER TABLE warehouse.fact_sales
+ADD CONSTRAINT IF NOT EXISTS fk_fact_sales_customer
+    FOREIGN KEY (customer_id)
+    REFERENCES warehouse.dim_customers(customer_id);
+
+ALTER TABLE warehouse.fact_sales
+ADD CONSTRAINT IF NOT EXISTS fk_fact_sales_product
+    FOREIGN KEY (product_id)
+    REFERENCES warehouse.dim_products(product_id);
